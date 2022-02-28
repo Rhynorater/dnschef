@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #
-# DNSChef is a highly configurable DNS Proxy for Penetration Testers 
+# DNSChef is a highly configurable DNS Proxy for Penetration Testers
 # and Malware Analysts. Please visit http://thesprawl.org/projects/dnschef/
 # for the latest version and documentation. Please forward all issues and
 # concerns to iphelix [at] thesprawl.org.
@@ -12,15 +12,15 @@ DNSCHEF_VERSION = "0.4"
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met: 
+# modification, are permitted provided that the following conditions are met:
 #
 # 1. Redistributions of source code must retain the above copyright notice, this
-#    list of conditions and the following disclaimer. 
+#    list of conditions and the following disclaimer.
 # 2. Redistributions in binary form must reproduce the above copyright notice,
 #    this list of conditions and the following disclaimer in the documentation
 #    and/or other materials provided with the distribution.
 # 3. Neither the name of the copyright holder nor the names of its contributors
-#    may be used to endorse or promote products derived from this software without 
+#    may be used to endorse or promote products derived from this software without
 #    specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
@@ -51,7 +51,7 @@ import os
 import binascii
 import string
 import base64
-
+from custom import customResp
 
 class DNSChefFormatter(logging.Formatter):
 
@@ -115,6 +115,8 @@ class DNSHandler():
                 for record in self.server.nametodns:
 
                     fake_records[record] = self.findnametodns(qname, self.server.nametodns[record])
+
+                fake_records.update(customResp(qname))
 
                 # Check if there is a fake record for the current request qtype
                 if qtype in fake_records and fake_records[qtype]:
@@ -371,7 +373,7 @@ class TCPHandler(DNSHandler, socketserver.BaseRequestHandler):
 
         if response:
             # Calculate and add the additional "length" parameter
-            # used in TCP DNS protocol 
+            # used in TCP DNS protocol
             length = binascii.unhexlify("%04x" % len(response))
             self.request.sendall(length + response)
 
