@@ -40,7 +40,7 @@ elif args.r:
         if data.startswith(args.r):
             data = data.replace(args.r, "")
             index = int(data.split(":")[0])
-            data = "".join(data.split(":")[1:])
+            data = ":".join(data.split(":")[1:])
             if index in seen:
                 continue
             elif index == 0 and all(map(lambda i: i in seen, range(1, max(seen)+1))):
