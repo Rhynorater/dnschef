@@ -25,7 +25,7 @@ elif args.c:
     rh = ''.join(chr(random.randrange(65,90)) for i in range(3)).lower()
     d = rh+":"+args.c
     pickle.dump((q, d), open("responses.pickle", "wb"))
-    print("Your response code is: "+d+".\nCommand queued...")
+    print("Your response code is: "+rh+".\nCommand queued...")
 elif args.r:
     assert(len(args.r)==3)
     baseDomain = "."+baseDomain
